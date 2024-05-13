@@ -14,6 +14,8 @@
 		3CDB92E72BF192170039D523 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB92E62BF192170039D523 /* Base */; };
 		3CDB92EF2BF199460039D523 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92EE2BF199460039D523 /* MapViewController.swift */; };
 		3CDB92F12BF1A2BC0039D523 /* AddJournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92F02BF1A2BC0039D523 /* AddJournalViewController.swift */; };
+		3CDB92F32BF1B4490039D523 /* JournalDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92F22BF1B4490039D523 /* JournalDetailTableViewController.swift */; };
+		3CDB92F52BF1B5720039D523 /* JournalListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92F42BF1B5720039D523 /* JournalListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		3CDB92E82BF192170039D523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CDB92EE2BF199460039D523 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3CDB92F02BF1A2BC0039D523 /* AddJournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJournalViewController.swift; sourceTree = "<group>"; };
+		3CDB92F22BF1B4490039D523 /* JournalDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDetailTableViewController.swift; sourceTree = "<group>"; };
+		3CDB92F42BF1B5720039D523 /* JournalListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +64,8 @@
 			children = (
 				3CDB92DA2BF192150039D523 /* AppDelegate.swift */,
 				3CDB92DC2BF192150039D523 /* SceneDelegate.swift */,
-				3CDB92DE2BF192150039D523 /* JournalListViewController.swift */,
+				3CDB92F62BF1B5960039D523 /* Journal List Screen */,
+				3CDB92F22BF1B4490039D523 /* JournalDetailTableViewController.swift */,
 				3CDB92F02BF1A2BC0039D523 /* AddJournalViewController.swift */,
 				3CDB92EE2BF199460039D523 /* MapViewController.swift */,
 				3CDB92E32BF192170039D523 /* Assets.xcassets */,
@@ -68,6 +73,15 @@
 				3CDB92E82BF192170039D523 /* Info.plist */,
 			);
 			path = "JRN-CodeOnly";
+			sourceTree = "<group>";
+		};
+		3CDB92F62BF1B5960039D523 /* Journal List Screen */ = {
+			isa = PBXGroup;
+			children = (
+				3CDB92DE2BF192150039D523 /* JournalListViewController.swift */,
+				3CDB92F42BF1B5720039D523 /* JournalListTableViewCell.swift */,
+			);
+			path = "Journal List Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +154,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CDB92F32BF1B4490039D523 /* JournalDetailTableViewController.swift in Sources */,
 				3CDB92DF2BF192150039D523 /* JournalListViewController.swift in Sources */,
+				3CDB92F52BF1B5720039D523 /* JournalListTableViewCell.swift in Sources */,
 				3CDB92DB2BF192150039D523 /* AppDelegate.swift in Sources */,
 				3CDB92DD2BF192150039D523 /* SceneDelegate.swift in Sources */,
 				3CDB92EF2BF199460039D523 /* MapViewController.swift in Sources */,

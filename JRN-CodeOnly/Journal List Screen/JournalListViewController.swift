@@ -22,20 +22,20 @@ class JournalListViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.dataSource = self
         tableView.delegate = self
         // dequeue 를 위해서 queue에 넣어 놓는 작업
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "journalCell")
+        tableView.register(JournalListTableViewCell.self, forCellReuseIdentifier: "journalCell")
         
         tableView.backgroundColor = .white
         view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        let global = view.safeAreaLayoutGuide
+        let safeArea = view.safeAreaLayoutGuide
         // 가로 세로 체우는 작업
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: global.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: global.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: global.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: global.bottomAnchor)
+            tableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
         navigationItem.title = "Journal"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
@@ -50,6 +50,17 @@ class JournalListViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.dequeueReusableCell(withIdentifier: "journalCell", for: indexPath)
+    }
+    
+    
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let journalDetailTableViewController = JournalDetailTableViewController()
+        show(journalDetailTableViewController, sender: self)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        90
     }
     
     // MARK: - Methods
