@@ -16,8 +16,12 @@ class JournalListViewController: UIViewController, UITableViewDataSource, UITabl
         return tableView
     }()
     
+    var sampleJournalEntryData = SampleJournalEntryData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        sampleJournalEntryData.createSampleJournalEntryData()
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -45,11 +49,14 @@ class JournalListViewController: UIViewController, UITableViewDataSource, UITabl
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        sampleJournalEntryData.journalEntries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.dequeueReusableCell(withIdentifier: "journalCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "journalCell", for: indexPath) as! JournalListTableViewCell
+        let journalEntry = sampleJournalEntryData.journalEntries[indexPath.row]
+        cell.configureCell(journalEntry: journalEntry)
+        return cell
     }
     
     
