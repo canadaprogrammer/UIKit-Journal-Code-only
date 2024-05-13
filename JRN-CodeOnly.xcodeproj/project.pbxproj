@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		3CDB92DB2BF192150039D523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92DA2BF192150039D523 /* AppDelegate.swift */; };
 		3CDB92DD2BF192150039D523 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92DC2BF192150039D523 /* SceneDelegate.swift */; };
-		3CDB92DF2BF192150039D523 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92DE2BF192150039D523 /* ViewController.swift */; };
+		3CDB92DF2BF192150039D523 /* JournalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92DE2BF192150039D523 /* JournalListViewController.swift */; };
 		3CDB92E42BF192170039D523 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB92E32BF192170039D523 /* Assets.xcassets */; };
 		3CDB92E72BF192170039D523 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB92E62BF192170039D523 /* Base */; };
+		3CDB92EF2BF199460039D523 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92EE2BF199460039D523 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3CDB92D72BF192150039D523 /* JRN-CodeOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JRN-CodeOnly.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDB92DA2BF192150039D523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CDB92DC2BF192150039D523 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3CDB92DE2BF192150039D523 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3CDB92DE2BF192150039D523 /* JournalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListViewController.swift; sourceTree = "<group>"; };
 		3CDB92E32BF192170039D523 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CDB92E62BF192170039D523 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CDB92E82BF192170039D523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CDB92EE2BF199460039D523 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,8 @@
 			children = (
 				3CDB92DA2BF192150039D523 /* AppDelegate.swift */,
 				3CDB92DC2BF192150039D523 /* SceneDelegate.swift */,
-				3CDB92DE2BF192150039D523 /* ViewController.swift */,
+				3CDB92DE2BF192150039D523 /* JournalListViewController.swift */,
+				3CDB92EE2BF199460039D523 /* MapViewController.swift */,
 				3CDB92E32BF192170039D523 /* Assets.xcassets */,
 				3CDB92E52BF192170039D523 /* LaunchScreen.storyboard */,
 				3CDB92E82BF192170039D523 /* Info.plist */,
@@ -134,9 +137,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CDB92DF2BF192150039D523 /* ViewController.swift in Sources */,
+				3CDB92DF2BF192150039D523 /* JournalListViewController.swift in Sources */,
 				3CDB92DB2BF192150039D523 /* AppDelegate.swift in Sources */,
 				3CDB92DD2BF192150039D523 /* SceneDelegate.swift in Sources */,
+				3CDB92EF2BF199460039D523 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
