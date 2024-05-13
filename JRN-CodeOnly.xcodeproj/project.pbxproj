@@ -16,6 +16,7 @@
 		3CDB92F12BF1A2BC0039D523 /* AddJournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92F02BF1A2BC0039D523 /* AddJournalViewController.swift */; };
 		3CDB92F32BF1B4490039D523 /* JournalDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92F22BF1B4490039D523 /* JournalDetailTableViewController.swift */; };
 		3CDB92F52BF1B5720039D523 /* JournalListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92F42BF1B5720039D523 /* JournalListTableViewCell.swift */; };
+		3CDB92F82BF1E5E50039D523 /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB92F72BF1E5E50039D523 /* JournalEntry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3CDB92F02BF1A2BC0039D523 /* AddJournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJournalViewController.swift; sourceTree = "<group>"; };
 		3CDB92F22BF1B4490039D523 /* JournalDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDetailTableViewController.swift; sourceTree = "<group>"; };
 		3CDB92F42BF1B5720039D523 /* JournalListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListTableViewCell.swift; sourceTree = "<group>"; };
+		3CDB92F72BF1E5E50039D523 /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				3CDB92DA2BF192150039D523 /* AppDelegate.swift */,
 				3CDB92DC2BF192150039D523 /* SceneDelegate.swift */,
 				3CDB92F62BF1B5960039D523 /* Journal List Screen */,
+				3CDB92F72BF1E5E50039D523 /* JournalEntry.swift */,
 				3CDB92F22BF1B4490039D523 /* JournalDetailTableViewController.swift */,
 				3CDB92F02BF1A2BC0039D523 /* AddJournalViewController.swift */,
 				3CDB92EE2BF199460039D523 /* MapViewController.swift */,
@@ -156,6 +159,7 @@
 			files = (
 				3CDB92F32BF1B4490039D523 /* JournalDetailTableViewController.swift in Sources */,
 				3CDB92DF2BF192150039D523 /* JournalListViewController.swift in Sources */,
+				3CDB92F82BF1E5E50039D523 /* JournalEntry.swift in Sources */,
 				3CDB92F52BF1B5720039D523 /* JournalListTableViewCell.swift in Sources */,
 				3CDB92DB2BF192150039D523 /* AppDelegate.swift in Sources */,
 				3CDB92DD2BF192150039D523 /* SceneDelegate.swift in Sources */,
