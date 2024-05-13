@@ -7,7 +7,8 @@
 
 import UIKit
 
-class JournalListViewController: UIViewController {
+class JournalListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     // 무거워서 lazy로 생성
     lazy var tableView: UITableView = {
         // 초기화
@@ -17,7 +18,11 @@ class JournalListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        // dequeue 를 위해서 queue에 넣어 놓는 작업
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "journalCell")
         
         tableView.backgroundColor = .white
         view.addSubview(tableView)
@@ -38,6 +43,16 @@ class JournalListViewController: UIViewController {
                                                             action: #selector(addJournal))
     }
     
+    // MARK: - UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.dequeueReusableCell(withIdentifier: "journalCell", for: indexPath)
+    }
+    
+    // MARK: - Methods
     @objc private func addJournal() {
         let addJournalViewController = AddJournalViewController()
         let navController = UINavigationController(rootViewController: addJournalViewController)
