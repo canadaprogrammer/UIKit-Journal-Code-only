@@ -69,7 +69,6 @@ class JournalListTableViewCell: UITableViewCell {
     
     // MARK: - configureCell
     func configureCell(journalEntry: JournalEntry) {
-        print(journalEntry.entryTitle)
         thumbnailView.image = journalEntry.photo
         dateLabel.text = journalEntry.date.formatted(.dateTime.year().month().day())
         titleLabel.text = journalEntry.entryTitle

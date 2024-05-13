@@ -7,7 +7,7 @@
 
 import UIKit
 
-class JournalListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class JournalListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddJournalControllerDelegate {
     
     // 무거워서 lazy로 생성
     lazy var tableView: UITableView = {
@@ -75,7 +75,14 @@ class JournalListViewController: UIViewController, UITableViewDataSource, UITabl
         let addJournalViewController = AddJournalViewController()
         let navController = UINavigationController(rootViewController: addJournalViewController)
         
+        addJournalViewController.delegate = self
+        
         present(navController, animated: true)
+    }
+    
+    
+    func saveJournalEntry(_ journalEntry: JournalEntry) {
+        print("Test \(journalEntry.entryTitle)")
     }
 }
 
