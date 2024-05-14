@@ -8,7 +8,18 @@
 import UIKit
 
 class JournalDetailTableViewController: UITableViewController {
-
+//    weak var jounalEntry: JournalEntry?
+    let journalEntry: JournalEntry
+    
+    init(journalEntry: JournalEntry) {
+        self.journalEntry = journalEntry
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
