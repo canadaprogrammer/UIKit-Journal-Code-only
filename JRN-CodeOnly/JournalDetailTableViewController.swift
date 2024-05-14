@@ -7,6 +7,34 @@
 
 import UIKit
 
+class CustomTableViewCell: UITableViewCell {
+    var stackView: UIStackView!
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupUI() {
+        stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.backgroundColor = .systemCyan
+        stackView.spacing = 0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.widthAnchor.constraint(equalToConstant: 252),
+            stackView.heightAnchor.constraint(equalToConstant: 44),
+        ])
+    }
+}
 class JournalDetailTableViewController: UITableViewController {
 //    weak var jounalEntry: JournalEntry?
     let journalEntry: JournalEntry
@@ -62,6 +90,7 @@ class JournalDetailTableViewController: UITableViewController {
         super.viewDidLoad()
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "customCell")
         navigationItem.title = "Detail"
     }
 
@@ -79,10 +108,11 @@ class JournalDetailTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         switch indexPath.row {
         case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.contentView.addSubview(dateLabel)
             dateLabel.text = journalEntry.date.formatted(.dateTime.year().month(.wide).day())
             let marginGuide = cell.contentView.layoutMarginsGuide
@@ -91,7 +121,12 @@ class JournalDetailTableViewController: UITableViewController {
                 dateLabel.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor),
                 dateLabel.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor),
             ])
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
+            return cell
         case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.contentView.addSubview(titleLabel)
             titleLabel.text = journalEntry.entryTitle
             let marginGuide = cell.contentView.layoutMarginsGuide
@@ -100,7 +135,9 @@ class JournalDetailTableViewController: UITableViewController {
                 titleLabel.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor),
                 titleLabel.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor),
             ])
+            return cell
         case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.contentView.addSubview(bodyTextView)
             bodyTextView.text = journalEntry.entryBody
             let marginGuide = cell.contentView.layoutMarginsGuide
@@ -110,7 +147,9 @@ class JournalDetailTableViewController: UITableViewController {
                 bodyTextView.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor),
                 bodyTextView.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor),
             ])
+            return cell
         case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.contentView.addSubview(imageView)
             imageView.image = journalEntry.photo
             NSLayoutConstraint.activate([
@@ -119,7 +158,9 @@ class JournalDetailTableViewController: UITableViewController {
                 imageView.widthAnchor.constraint(equalToConstant: 300),
                 imageView.heightAnchor.constraint(equalToConstant: 300)
             ])
+            return cell
         case 5:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.contentView.addSubview(mapView)
             NSLayoutConstraint.activate([
                 mapView.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
@@ -127,11 +168,10 @@ class JournalDetailTableViewController: UITableViewController {
                 mapView.widthAnchor.constraint(equalToConstant: 300),
                 mapView.heightAnchor.constraint(equalToConstant: 300)
             ])
+            return cell
         default:
-            print("Other")
+            return tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         }
-
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
