@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import CoreLocation
 
 protocol AddJournalControllerDelegate: NSObject {
     func saveJournalEntry(_ journalEntry: JournalEntry)
 }
 
-class AddJournalViewController: UIViewController {
+class AddJournalViewController: UIViewController, CLLocationManagerDelegate {
     weak var delegate: AddJournalControllerDelegate?
     
     private lazy var mainContainer: UIStackView = {
@@ -63,6 +64,31 @@ class AddJournalViewController: UIViewController {
         return imageView
     }()
     
+    
+    let locationManager = CLLocationManager()
+    var currentLocation: CLLocation?
+    
+    // MARK: - CLLocationManagerDelegate
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Location Manager")
+        if let myCurrentLocation = locations.first {
+            currentLocation = myCurrentLocation
+            print("current location: \(myCurrentLocation.coordinate.latitude), \(myCurrentLocation.coordinate.longitude)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
+            print("authorized location permission")
+        } else {
+            print("unauthorized location permission")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -109,6 +135,21 @@ class AddJournalViewController: UIViewController {
             imageView.widthAnchor.constraint(equalToConstant: 200),
             imageView.heightAnchor.constraint(equalToConstant: 200)
         ])
+        
+        // 스위치 상태 변화 감지
+        let switchComponent = toggleView.arrangedSubviews[0] as! UISwitch
+        switchComponent.addTarget(self, action: #selector(switchChanged(_:)), for: .valueChanged)
+        
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+    }
+    
+    @objc func switchChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            locationManager.requestLocation()
+        } else {
+            currentLocation = nil
+        }
     }
     
     @objc func save() {
@@ -122,15 +163,12 @@ class AddJournalViewController: UIViewController {
     @objc func cancel() {
         dismiss(animated: true)
     }
-
     /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
     }
     */
-
 }
