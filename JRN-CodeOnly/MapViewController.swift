@@ -13,7 +13,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     let locationManager = CLLocationManager()
     
-    var sampleJournalEntryData = SampleJournalEntryData()
+//    var sampleJournalEntryData = SampleJournalEntryData()
     
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
@@ -24,15 +24,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sampleJournalEntryData.createSampleJournalEntryData()
-        mapView.addAnnotations(sampleJournalEntryData.journalEntries)
+//        sampleJournalEntryData.createSampleJournalEntryData()
+//        mapView.addAnnotations(sampleJournalEntryData.journalEntries)
 
         view.backgroundColor = .white
 //        navigationItem.title = "Map"
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         self.navigationItem.title = "Loading..."
-        locationManager.requestLocation()
+//        locationManager.requestLocation()
         view.addSubview(mapView)
         
         let safeArea = view.safeAreaLayoutGuide
@@ -43,6 +43,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             mapView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
     }
+    
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        locationManager.requestLocation()
+    }
 
     // MARK: - CLLOcationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -51,6 +56,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let long = myCurrentLocation.coordinate.longitude
             self.navigationItem.title = "Map"
             mapView.region = setInitialRegion(lat: lat, long: long)
+            
+            mapView.addAnnotations(SharedData.shared.getAllJournalEntries())
         }
     }
     
