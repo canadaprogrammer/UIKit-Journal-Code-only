@@ -76,6 +76,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return nil
     }
     
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if let journalEntry = view.annotation as? JournalEntry {
+            let journalDetailViewController = JournalDetailTableViewController(journalEntry: journalEntry)
+            show(journalDetailViewController, sender: nil)
+        }
+    }
     // MARK: - Methods
     func setInitialRegion(lat: CLLocationDegrees, long: CLLocationDegrees) -> MKCoordinateRegion {
         MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
