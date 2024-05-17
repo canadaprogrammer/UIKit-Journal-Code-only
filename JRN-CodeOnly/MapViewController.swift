@@ -13,8 +13,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     let locationManager = CLLocationManager()
     
-//    var sampleJournalEntryData = SampleJournalEntryData()
-    
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.delegate = self
@@ -24,15 +22,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        sampleJournalEntryData.createSampleJournalEntryData()
-//        mapView.addAnnotations(sampleJournalEntryData.journalEntries)
 
         view.backgroundColor = .white
-//        navigationItem.title = "Map"
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         self.navigationItem.title = "Loading..."
-//        locationManager.requestLocation()
         view.addSubview(mapView)
         
         let safeArea = view.safeAreaLayoutGuide
@@ -43,7 +37,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             mapView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        SharedData.shared.loadJournalEntriesData()
+    }
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
         locationManager.requestLocation()
