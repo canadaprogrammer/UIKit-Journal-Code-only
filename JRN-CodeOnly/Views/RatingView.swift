@@ -12,7 +12,7 @@ class RatingView: UIStackView {
     var rating = 0 {
         // property observer
         didSet {
-            uupdateButtonSelectionStates()
+            updateButtonSelectionStates()
         }
     }
     private let buttonSize = CGSize(width: 44, height: 44)
@@ -45,7 +45,7 @@ class RatingView: UIStackView {
         }
     }
     
-    private func uupdateButtonSelectionStates() {
+    private func updateButtonSelectionStates() {
         for (index, button) in ratingButtons.enumerated() {
             button.isSelected = index < rating
         }
