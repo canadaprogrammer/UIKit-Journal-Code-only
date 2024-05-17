@@ -13,6 +13,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     let locationManager = CLLocationManager()
     
+    var sampleJournalEntryData = SampleJournalEntryData()
+    
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -21,6 +23,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sampleJournalEntryData.createSampleJournalEntryData()
+        mapView.addAnnotations(sampleJournalEntryData.journalEntries)
 
         view.backgroundColor = .white
 //        navigationItem.title = "Map"
