@@ -68,6 +68,14 @@ class JournalDetailTableViewController: UITableViewController {
         imageView.image = UIImage(systemName: "face.smiling")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return imageView
+    }()
+    private lazy var mapView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "map")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         guard let latitude = journalEntry.latitude,
               let longitude = journalEntry.longitude else {
             return imageView
@@ -87,14 +95,6 @@ class JournalDetailTableViewController: UITableViewController {
             }
             imageView.image = snapshot.image
         }
-        
-        return imageView
-    }()
-    private lazy var mapView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "map")
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
         
     }()
