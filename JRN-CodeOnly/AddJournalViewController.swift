@@ -84,10 +84,34 @@ class AddJournalViewController: UIViewController, CLLocationManagerDelegate, UIT
         return imageView
     }()
     
+
     private lazy var saveButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
     }()
     
+    let locationManager = CLLocationManager()
+    var currentLocation: CLLocation?
+    
+    // MARK: - CLLocationManagerDelegate
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Location Manager")
+        if let myCurrentLocation = locations.first {
+            currentLocation = myCurrentLocation
+            print("current location: \(myCurrentLocation.coordinate.latitude), \(myCurrentLocation.coordinate.longitude)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
+            print("authorized location permission")
+        } else {
+            print("unauthorized location permission")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,6 +162,10 @@ class AddJournalViewController: UIViewController, CLLocationManagerDelegate, UIT
             imageView.heightAnchor.constraint(equalToConstant: 200)
         ])
         
+        // 스위치 상태 변화 감지
+        let switchComponent = toggleView.arrangedSubviews[0] as! UISwitch
+        switchComponent.addTarget(self, action: #selector(switchChanged(_:)), for: .valueChanged)
+        
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
     }
@@ -187,6 +215,13 @@ class AddJournalViewController: UIViewController, CLLocationManagerDelegate, UIT
     
     @objc func textChanged(textField: UITextField) {
         updateSaveButtonState()
+    }
+    @objc func switchChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            locationManager.requestLocation()
+        } else {
+            currentLocation = nil
+        }
     }
     
     @objc func save() {
