@@ -12,11 +12,16 @@ protocol AddJournalControllerDelegate: NSObject {
     func saveJournalEntry(_ journalEntry: JournalEntry)
 }
 
-class AddJournalViewController: UIViewController, CLLocationManagerDelegate {
+class AddJournalViewController: UIViewController, CLLocationManagerDelegate, UITextViewDelegate {
     weak var delegate: AddJournalControllerDelegate?
     
     final let LABEL_VIEW_TAG = 1001
     
+    var locationSwitchIsOn = false {
+        didSet {
+            updateSaveButtonState()
+        }
+    }
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     
@@ -60,12 +65,14 @@ class AddJournalViewController: UIViewController, CLLocationManagerDelegate {
     private lazy var titleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Journal Title"
+        textField.addTarget(self, action: #selector(textChanged(textField:)), for: .editingChanged)
         return textField
     }()
 
     private lazy var bodyTextView: UITextView = {
         let textView = UITextView()
         textView.text = "Journal Boddy"
+        textView.delegate = self
         return textView
     }()
 
@@ -75,13 +82,19 @@ class AddJournalViewController: UIViewController, CLLocationManagerDelegate {
         return imageView
     }()
     
+    private lazy var saveButton: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = "New Entry"
         view.backgroundColor = .white
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
+        navigationItem.rightBarButtonItem = saveButton
+        saveButton.isEnabled = false
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
                 
         
@@ -126,6 +139,35 @@ class AddJournalViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestAlwaysAuthorization()
     }
     
+    // MARK: - UITextViewDelegate
+    func textViewDidChange(_ textView: UITextView) {
+        updateSaveButtonState()
+    }
+    
+    // MARK: - Methods
+    func updateSaveButtonState() {
+        if locationSwitchIsOn {
+            guard let title = titleTextField.text, !title.isEmpty,
+                  let body = bodyTextView.text, !body.isEmpty,
+                  let _ = currentLocation else {
+                saveButton.isEnabled = false
+                return
+            }
+            saveButton.isEnabled = true
+        } else {
+            guard let title = titleTextField.text, !title.isEmpty,
+                  let body = bodyTextView.text, !body.isEmpty else {
+                saveButton.isEnabled = false
+                return
+            }
+            saveButton.isEnabled = true
+        }
+    }
+    
+    @objc func textChanged(textField: UITextField) {
+        updateSaveButtonState()
+    }
+    
     @objc func save() {
         guard let title = titleTextField.text, !title.isEmpty,
               let body = bodyTextView.text, !body.isEmpty else { return }
@@ -144,6 +186,7 @@ class AddJournalViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     @objc func valueChanged(sender: UISwitch) {
+        locationSwitchIsOn = sender.isOn
         if sender.isOn {
             if let label = toggleView.viewWithTag(LABEL_VIEW_TAG) as? UILabel {
                 label.text = "Getting Location..."
@@ -164,7 +207,7 @@ class AddJournalViewController: UIViewController, CLLocationManagerDelegate {
             if let label = toggleView.viewWithTag(LABEL_VIEW_TAG) as? UILabel {
                 label.text = "Done"
             }
-            // TODO: updateButtonState
+            updateSaveButtonState()
         }
     }
     
